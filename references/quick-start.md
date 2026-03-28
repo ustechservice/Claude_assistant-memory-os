@@ -1,130 +1,177 @@
 # Quick Start Guide
 
-Get the four-destination assistant OS running in Notion in under 30 minutes.
+Set up your assistant memory OS in Notion in under 30 minutes.
 
 ---
 
-## Step 1 — Create Your Four Destinations in Notion
+## What You're Building
 
-### A. Claude Sessions Database
-1. Create a new full-page database in Notion
-2. Title it `Claude Sessions`
-3. Add these properties:
-   - `Date` (Date)
-   - `Area` (Select: Homelab, Research, Consulting, Automation, General)
-   - `Summary` (Text)
-   - `Decisions` (Text)
-   - `Next Actions` (Text)
-   - `Open Loops` (Text)
-   - `Key Outputs` (Text)
-   - `Status` (Select: Active, Closed, Paused)
-   - `Importance` (Select: High, Medium, Low)
-4. Set default view: Table, sorted by Date descending
+Four destinations in Notion:
 
-### B. Standing Orders Database
-1. Create a new full-page database titled `Standing Orders`
-2. Add these properties:
-   - `Status` (Select: Active, Paused, Completed)
-   - `Cadence` (Select: Daily, Weekly, Monthly, Event-triggered)
-   - `Purpose` (Text)
-   - `Expected Output` (Text)
-   - `Destination` (Text)
-   - `Last Run` (Date)
-   - `Next Run` (Date)
-   - `Notes` (Text)
-3. Set default view: Table, filtered to Status = Active
-
-### C. Category Pages Database
-1. Create a new full-page database titled `Category Pages`
-2. Add these properties:
-   - `Category` (Select: Research, Revenue, Ops, Ideas, SOPs, Daily Logs)
-   - `Date Created` (Date)
-   - `Last Updated` (Date)
-   - `Status` (Select: Draft, Active, Archived)
-   - `Tags` (Multi-select)
-3. Set default view: Board grouped by Category
-
-### D. Durable Memory Page
-1. Create a new regular Notion **page** (not a database) titled `Durable Memory`
-2. Add these sections as H2 headers:
-   - `## Preferences`
-   - `## Constraints`
-   - `## Routing Rules`
-   - `## Stable Facts`
-3. Leave sections empty for now — you'll fill them as Claude learns your preferences
+| Destination | Type | Purpose |
+|---|---|---|
+| Claude Sessions | Database | Session continuity logs |
+| Standing Orders | Database | Recurring duties |
+| Durable Memory | Page | Stable preferences and rules |
+| Category Pages | Pages | Long-form outputs and knowledge |
 
 ---
 
-## Step 2 — Configure Claude's Routing Rules
+## Step 1: Create Claude Sessions Database (5 min)
 
-Tell Claude the following (it will save to Durable Memory automatically):
+Create a new Notion database named **Claude Sessions**.
 
-> "My Notion assistant OS is set up. Claude Sessions database is [name/ID],
-> Standing Orders database is [name/ID], Category Pages database is [name/ID],
-> and Durable Memory is a page titled 'Durable Memory'. Save these as routing rules."
+Add these properties:
 
-Claude will write the routing configuration to your Durable Memory page.
+| Property | Type |
+|---|---|
+| Session Title | Title |
+| Date | Date |
+| Area / Topic | Select |
+| Summary | Text |
+| Decisions | Text |
+| Next Actions | Text |
+| Open Loops | Text |
+| Key Outputs | Text |
+| Status | Select (Active / Closed / Paused) |
+| Importance | Select (High / Medium / Low) |
+
+**Add these views:**
+- All Sessions (default table)
+- Open Loops (filter: Open Loops is not empty AND Status ≠ Closed)
+- Active (filter: Status = Active)
 
 ---
 
-## Step 3 — Add Your First Durable Memory Entries
+## Step 2: Create Standing Orders Database (5 min)
 
-Start simple. Tell Claude:
+Create a new Notion database named **Standing Orders**.
 
-> "Remember: I prefer Python for all code unless specified. My timezone is
-> America/Detroit. Default to concise responses with no preamble."
+Add these properties:
 
-Claude will add these to your Durable Memory page under the right sections.
+| Property | Type |
+|---|---|
+| Name | Title |
+| Status | Select (Active / Paused / Completed) |
+| Cadence | Select (Daily / Weekly / Monthly / Event-triggered) |
+| Purpose | Text |
+| Expected Output | Text |
+| Destination | Text |
+| Last Run | Date |
+| Next Run | Date |
+
+**Add these views:**
+- Active (filter: Status = Active)
+- Due This Week (filter: Next Run ≤ today + 7 days AND Status = Active)
 
 ---
 
-## Step 4 — Run Your First Session
+## Step 3: Create Durable Memory Page (3 min)
 
-Do any substantive work with Claude (3+ meaningful exchanges). At the end, say:
+Create a new Notion page named **Durable Memory**.
+
+Paste this template as the page body and fill in your details:
+
+```
+## Preferences
+- [Add your preferences here]
+
+## Constraints
+- [Add constraints here]
+
+## Routing Rules
+- Claude Sessions database: [enter your database name or ID]
+- Standing Orders database: [enter your database name or ID]
+- Durable Memory: this page
+
+## Stable Facts
+- Primary timezone: [your timezone]
+- Preferred stack: [your stack]
+
+_Last reviewed: [date] | Entry count: [N]_
+```
+
+**Keep this under 20 total bullets. This is not a diary.**
+
+---
+
+## Step 4: Create Category Pages (5 min)
+
+Create a top-level Notion page named **Knowledge** (or **Outputs**, or whatever fits your naming).
+
+Inside it, create pages for the categories you actually need now:
+
+- Research
+- Ops
+- Ideas
+
+Add others (Revenue, SOPs, Daily Logs, Plans) only when a concrete need exists. Don't build out structure you won't use.
+
+---
+
+## Step 5: Configure Routing (5 min)
+
+Tell Claude your setup. Paste something like this in your first session:
+
+```
+I've set up my assistant memory OS in Notion. Here's my configuration:
+
+- Claude Sessions database: [name]
+- Standing Orders database: [name]
+- Durable Memory: a page called "Durable Memory" in [location]
+- Category Pages: Research, Ops, Ideas under a page called "Knowledge"
+
+Please update your routing rules and confirm you're ready to use this system.
+```
+
+Claude will save your routing rules to Durable Memory and confirm.
+
+---
+
+## Step 6: Run Your First Session (5 min)
+
+Start a conversation with 3+ meaningful exchanges. At the end, say:
 
 > "Summarize this session."
 
-Claude should automatically:
-1. Write a Claude Sessions entry with title, summary, decisions, next actions
-2. Flag any recurring duties for Standing Orders
-3. Confirm with the session title
+Claude will write a session log entry automatically. Verify:
+- Title follows `YYYY-MM-DD – [2–4 word topic]` format
+- Summary is 2–3 sentences, under 300 words
+- Decisions are bullet points
+- Next actions have owners
+- Key outputs are linked, not pasted
 
 ---
 
-## Step 5 — Validate the System
+## Hybrid Setup (Optional)
 
-Check that:
-- [ ] Claude Sessions has a new entry with the correct date and area
-- [ ] The summary is under 300 words
-- [ ] Decisions are bullet points, not prose
-- [ ] Next Actions are concrete (not vague)
-- [ ] No content was duplicated into Durable Memory unnecessarily
+If you're using Claude Code or OpenClaw and want local memory:
 
----
-
-## Optional: Hybrid Setup (Local MEMORY.md)
-
-If you use OpenClaw or inject context into a system prompt:
-
-1. Create `MEMORY.md` at a stable path (e.g., `C:\Users\[you]\Documents\MEMORY.md`)
-2. Copy the four sections from Durable Memory into this file
-3. Configure your wrapper to inject this file at session start
-4. Use Notion for Sessions, Standing Orders, and Category Pages only
-5. `MEMORY.md` is now the single source of truth for Durable Memory
+1. Create a `MEMORY.md` file in your project root (or `~/.claude/memory/`)
+2. Add your preferences, constraints, and routing rules there
+3. Tell Claude: "My Durable Memory lives in MEMORY.md locally. Session logs and standing orders go to Notion."
+4. Claude will use local memory for behavior-shaping facts and Notion for everything richer
 
 ---
 
 ## Troubleshooting
 
 **Claude isn't saving sessions automatically**
-→ Check that the skill is installed and triggering. Say "summarize this session" explicitly.
+→ Make sure Claude knows your database names. Repeat the configuration step above.
+→ Check that your Notion MCP is connected (see `references/notion-mcp-calls.md`).
 
-**Entries are too long**
-→ Remind Claude: "Keep session summaries under 300 words, decisions as bullets only."
+**Session entries are too long**
+→ Remind Claude: "Session summaries should be under 300 words. Compress."
+→ Add to Durable Memory: "Session log summaries: max 300 words."
 
-**Wrong destination**
-→ Be explicit: "Save this to Standing Orders" or "This goes in the Ops category page."
+**Durable Memory is bloating**
+→ Follow the cleanup process in `references/maintenance.md`.
+→ Target: ≤15 bullets after pruning.
 
-**Durable Memory is growing too fast**
-→ Run a cleanup: "Review my Durable Memory and remove anything that's session-specific
-   or duplicated."
+**"Where should I save this?" keeps coming up**
+→ Your Routing Rules section in Durable Memory is incomplete or stale.
+→ Add explicit routing rules for common output types.
+
+**Standing Orders aren't being executed**
+→ Check that each order has a cadence, expected output, and destination.
+→ Vague orders ("keep an eye on things") will not be executed. Make them specific.

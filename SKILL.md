@@ -1,137 +1,183 @@
 ---
 name: assistant-memory-os
-description: >
-  Governs how Claude routes, saves, and manages persistent information across sessions using
-  a four-destination Notion-based operating system: Claude Sessions (session continuity),
-  Standing Orders (recurring duties), Category Pages (long-form knowledge), and Durable Memory
-  (stable behavior-shaping facts). Trigger this skill whenever the user says "remember this",
-  "save this", "track this", "watch this", "summarize this session", "add a standing order",
-  or asks Claude to write to Notion, update memory, log a session, or route information anywhere
-  persistent. Also trigger when the user sets up or configures their Notion assistant OS, asks
-  what to save where, or wants to clean up memory bloat. Use proactively at natural session ends
-  when substantive work has been done.
+description: Notion-based assistant continuity system. Routes information cleanly across four layers — Session Logs, Durable Memory, Standing Orders, and Category Pages — to prevent memory bloat, context loss, and routing chaos. Use when the user wants to set up assistant continuity, save session summaries, capture recurring duties, or structure their Notion workspace as an assistant operating system.
+origin: user
 ---
 
 # Assistant Memory OS
 
-A four-destination routing system for clean assistant continuity across sessions.
+Keep assistant continuity clean, durable, and human-editable across sessions.
 
-## The Core Problem This Solves
+This skill governs how Claude saves and retrieves persistent information using a **four-destination system** built on Notion (with optional local memory). The core problem it solves: assistants fail continuity in three ways — they forget too much, save too much junk, or collapse sessions, recurring duties, and reference knowledge into one unmanageable pile.
 
-Assistants fail continuity in three ways: they forget too much, save too much junk, or
-collapse sessions, recurring duties, and reference knowledge into one unmanageable pile.
-This skill fixes that with disciplined routing.
+## When to Activate
 
----
+- User says "set up my assistant memory system" or "help me organize Notion for Claude"
+- User says "remember this," "save this," "log this," or "track this"
+- User says "summarize this session" or "write up what we did"
+- User says "watch this weekly," "check this every Monday," or "remind me to do X"
+- User asks "where should I save this?" for anything meant to persist
+- User wants to configure Notion as an assistant operating system
+- End of a session with 3+ meaningful exchanges — write a session log automatically, without asking permission
+- Assistant continuity is breaking down: things are being forgotten, duplicated, or buried
 
-## The Four Destinations
+## The Four-Layer Model
 
-### 1. Claude Sessions — Session Continuity
-**Use for:** meaningful session summaries, decisions, next actions, open loops, handoff
-context, links to detailed outputs, workstream status.
+Route all persistent information into exactly one of these destinations. Do not collapse them into one bucket.
 
-**Not for:** transcripts, trivial chatter, full research outputs (link to them instead),
-repeating what's already in Durable Memory.
+| Layer | Purpose | Hard Limits |
+|---|---|---|
+| **Session Logs** | Continuity between work sessions | Under 300 words per entry |
+| **Durable Memory** | Stable facts that shape future behavior | ≤20 bullets total |
+| **Standing Orders** | Recurring duties and scheduled obligations | Must have cadence + expected output |
+| **Category Pages** | Long-form knowledge, research, outputs | No word limit — use pages, not fields |
 
-### 2. Standing Orders — Recurring Operational Duties
-**Use for:** watch/track/report requests, monitoring tasks, scheduled reports, anything
-with a cadence — daily, weekly, monthly, event-triggered.
+### 1. Session Logs (Claude Sessions)
 
-**Not for:** one-time tasks, session-specific notes, general preferences.
+Session continuity records. Not transcripts — summaries.
 
-### 3. Category Pages — Long-Form Knowledge & Outputs
-**Use for:** research, SOPs, plans, audits, project docs, guides, revenue tracking,
-ops logs, ideas, anything reusable that isn't just continuity.
+**Save here:**
+- 2–3 sentence session summary (what happened, what was decided, what's next)
+- Decisions made
+- Concrete next actions with owners
+- Open loops not yet resolved
+- Links to key outputs produced (link, never paste content)
+- Handoff context for the next session
 
-**Default categories:** Research · Revenue · Ops · Ideas · SOPs · Daily Logs
+**Never save here:**
+- Full conversation transcripts
+- Preferences or rules (those go in Durable Memory)
+- Recurring duties (those go in Standing Orders)
+- Long-form outputs (link to the Category Page instead)
+- Trivial sessions with no decisions and no next actions
 
-Route into the relevant category — never into a vague "Recommendations" bucket.
+**Title format:** `YYYY-MM-DD – [2–4 word topic]`
 
-### 4. Durable Memory — Stable Behavior-Shaping Facts
-**Use for:** long-lived user preferences, operating rules, routing constraints, stable
-facts that affect future behavior.
+### 2. Durable Memory
 
-**Not for:** anything session-specific, project knowledge, recurring duties, or anything
-that changes frequently. Must stay lean. This is not a diary.
+Stable facts that actively shape behavior across all sessions. Not a diary.
 
----
+**Save here:**
+- Long-lived preferences ("always format code in Python unless specified")
+- Durable constraints ("never recommend per-seat SaaS above $X/user")
+- Operating rules ("end every meaningful session with a log entry")
+- Routing rules ("save research to the Research category page")
+- Stable identity facts (timezone, primary cloud, preferred stack)
 
-## Default Routing Decision
+**Never save here:**
+- Session-specific facts ("today we decided to use Redis")
+- One-time instructions
+- Links to articles or docs
+- Recurring duties
+- Research summaries or project knowledge
+- Full logs or transcripts
+- Anything with a date as its primary anchor
 
-| Signal | Destination |
-|---|---|
-| "summarize this session" / end of meaningful work | Claude Sessions |
-| "remember that I prefer…" / stable rule | Durable Memory |
-| "watch this weekly" / "report every Monday" | Standing Orders |
-| Research output / plan / SOP / guide | Category Page |
-| "save this" (ambiguous) | Ask one clarifying question, then route |
+**Hard limit: ≤20 total bullets across all sections. Review and prune quarterly.**
 
-For full routing logic with phrase triggers and ambiguous cases → read `references/routing-rules.md`
+### 3. Standing Orders
 
----
+Recurring operational commitments. Every order must have a cadence and an expected output.
 
-## Anti-Bloat Rules (Non-Negotiable)
+**Save here:**
+- Recurring duties ("every Monday: pull weekly metrics")
+- Watch tasks ("track competitor pricing changes")
+- Scheduled reports ("weekly revenue summary")
+- Monitoring obligations ("alert me when X happens")
 
-1. Do not save trivial chat to any destination.
-2. Do not duplicate the same fact across multiple destinations.
-3. Do not turn Durable Memory into a diary or session log.
-4. Do not turn Claude Sessions into full transcripts — summaries only.
-5. Do not store recurring duties as loose notes — Standing Orders exists for this.
-6. Do not create a vague "Recommendations" page — route into the relevant category.
-7. Compress aggressively. If it doesn't affect future behavior or decisions, cut it.
+**Never save here:**
+- One-time tasks (put in Session Log next actions instead)
+- Session notes or decisions
+- General preferences
 
-For detailed bloat detection and cleanup rules → read `references/anti-bloat.md`
+### 4. Category Pages
 
----
+Long-form work worth keeping. Organized by category, not by session.
 
-## Notion Implementation
+**Save here:**
+- Research documents
+- Plans and roadmaps
+- SOPs and guides
+- Audits and reports
+- Project knowledge
+- Reusable templates
 
-**Notion-first setup:** All four destinations are Notion databases or pages.
-**Hybrid setup:** Durable Memory lives locally (e.g., `MEMORY.md`); everything else in Notion.
+**Categories:** Research · Revenue · Ops · Ideas · SOPs · Daily Logs
 
-The system must remain human-editable. No hidden state. No hardcoded page IDs in this skill.
+Route every output into the most specific category. Do not create vague catch-alls like "Recommendations" or "Misc."
 
-For database schemas → read `references/schemas.md`
-For layout examples → read `references/notion-layouts.md`
-For first-time setup → read `references/quick-start.md`
-For exact Notion MCP call syntax → read `references/notion-mcp-calls.md`
+## Default Routing Logic
 
----
+Apply in order:
 
-## End-of-Session Behavior
+1. Does this repeat on a schedule or condition? → **Standing Orders**
+2. Is this a stable fact that shapes future behavior? → **Durable Memory**
+3. Is this a summary, decision, or action from this session? → **Session Logs**
+4. Is this a long-form output, research, plan, or guide? → **Category Pages**
+5. Is this trivial chatter with no decisions? → **Save nothing**
 
-At the natural end of a substantive session (3+ meaningful exchanges), Claude should:
+When something fits two destinations: the more specific one wins. Never duplicate across layers.
 
-1. Write a concise Claude Sessions entry: title, date, summary (2–3 sentences), decisions,
-   next actions, open loops.
-2. Check if any recurring duties were established → create/update a Standing Order.
-3. Check if any long-form output was produced → confirm it's saved to the right Category Page.
-4. Do NOT ask for permission for each step — just do it and confirm with the session title.
+Read `references/routing-rules.md` for trigger phrases, decision tree, and ambiguous case resolution.
 
-Skip if the session was trivial (troubleshooting only, quick lookups, no decisions).
+## Anti-Bloat Rules (Summary)
 
----
+- Do not save trivial chatter
+- Do not duplicate the same fact into multiple layers
+- Do not turn Durable Memory into a diary (hard cap: ≤20 bullets)
+- Do not turn Session Logs into transcripts (hard cap: 300 words)
+- Do not store recurring duties as loose notes — put them in Standing Orders
+- Do not paste output content into Session Logs — link to the Category Page
+- Do not create vague "Recommendations" or "General" buckets
+
+Read `references/anti-bloat.md` for detailed rules, warning signs, and cleanup guidance.
+
+## End-of-Session Routine
+
+After any session with 3+ meaningful exchanges:
+
+1. Write a concise session log entry automatically — no permission needed
+2. Summary: 2–3 sentences max
+3. Decisions: bullet list, max 5
+4. Next Actions: concrete, owned, not speculative
+5. Open Loops: only genuine unresolved questions
+6. Key Outputs: links only, never paste content
+7. Check if anything should move to Standing Orders or Durable Memory
+8. Do not write a log for trivial or purely conversational sessions
+
+## Operating Models
+
+### Notion-First
+
+All four layers live in Notion:
+- **Claude Sessions** database for Session Logs
+- **Standing Orders** database for recurring duties
+- **Durable Memory** page (single page, grouped sections)
+- **Category Pages** for long-form outputs
+
+### Hybrid (Recommended for Developers)
+
+- **Durable Memory** lives locally (`MEMORY.md` or Claude Code's memory system) — lean, version-controllable, fast to read
+- **Session Logs**, **Standing Orders**, and **Category Pages** live in Notion
+
+### Minimal (Solo Builder)
+
+- Claude Sessions database (5 fields: Title, Date, Summary, Next Actions, Open Loops)
+- Durable Memory as a single Notion page
+- Standing Orders as a simple database
+- Three category folders: Research, Ops, Ideas
+
+Read `references/notion-layouts.md` for full workspace structure examples.
 
 ## Reference Files
 
-| File | When to Read |
+| File | Use when |
 |---|---|
-| `references/quick-start.md` | First-time setup — Notion databases and initial config |
-| `references/routing-rules.md` | Deciding where ambiguous information belongs |
-| `references/schemas.md` | Setting up Notion databases, designing structure |
+| `references/routing-rules.md` | Deciding where information belongs |
+| `references/schemas.md` | Designing database and page structure |
 | `references/anti-bloat.md` | Memory quality is degrading or cleanup is needed |
-| `references/notion-layouts.md` | Setting up or reconfiguring the Notion OS |
-| `references/notion-mcp-calls.md` | Exact MCP call syntax for every save operation |
-| `references/examples.md` | Concrete examples of good/bad saves |
-| `references/maintenance.md` | Quarterly review checklist and on-demand cleanup |
-
----
-
-## Practical Defaults
-
-- Prefer hybrid model (local Durable Memory + Notion for everything else).
-- Keep Claude Sessions entries under 300 words.
-- Keep Durable Memory entries under 20 bullets total.
-- Keep Standing Orders minimal — only what actually recurs.
-- When in doubt between two destinations, pick the more specific one.
-- Always confirm saves with the entry title — never silently fail.
+| `references/notion-layouts.md` | Setting up a Notion workspace |
+| `references/examples.md` | Concrete good/bad examples for each layer |
+| `references/quick-start.md` | First-time setup in 30 minutes |
+| `references/notion-mcp-calls.md` | MCP call templates for Notion writes |
+| `references/maintenance.md` | Quarterly review and cleanup procedures |
