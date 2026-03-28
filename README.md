@@ -74,23 +74,16 @@ A four-destination routing skill for clean Claude assistant continuity across se
 
 ## Installation
 
-### Option 1: ECC Plugin (everything-claude-code)
-
-If you have the [everything-claude-code](https://github.com/affaan-m/everything-claude-code) plugin installed:
-
-1. Copy this repo into your ECC skills directory:
-   ```
-   ~/.claude/plugins/cache/everything-claude-code/.../skills/assistant-memory-os/
-   ```
-2. Restart Claude Code â€” the skill is immediately active
-
-### Option 2: Manual Install (Claude Code)
+### Option 1: Claude Code Skills Directory
 
 1. Clone or download this repo
-2. Copy the folder into your Claude skills directory (check your `~/.claude/` setup)
-3. The skill activates on trigger phrases automatically
+2. Copy the `assistant-memory-os` folder into your Claude Code skills directory:
+   ```
+   ~/.claude/skills/assistant-memory-os/
+   ```
+3. Restart Claude Code — the skill activates on trigger phrases automatically
 
-### Option 3: Copy SKILL.md as a System Prompt
+### Option 2: Copy SKILL.md as a System Prompt
 
 Paste the contents of `SKILL.md` into your system prompt or Claude project instructions. Reference the other files as needed.
 

@@ -1,7 +1,7 @@
 ---
 name: assistant-memory-os
 description: Notion-based assistant continuity system. Routes information cleanly across four layers — Session Logs, Durable Memory, Standing Orders, and Category Pages — to prevent memory bloat, context loss, and routing chaos. Use when the user wants to set up assistant continuity, save session summaries, capture recurring duties, or structure their Notion workspace as an assistant operating system.
-origin: user
+origin: ustechservice
 ---
 
 # Assistant Memory OS
