@@ -93,6 +93,8 @@ The system must remain human-editable. No hidden state. No hardcoded page IDs in
 
 For database schemas → read `references/schemas.md`
 For layout examples → read `references/notion-layouts.md`
+For first-time setup → read `references/quick-start.md`
+For exact Notion MCP call syntax → read `references/notion-mcp-calls.md`
 
 ---
 
@@ -114,11 +116,14 @@ Skip if the session was trivial (troubleshooting only, quick lookups, no decisio
 
 | File | When to Read |
 |---|---|
+| `references/quick-start.md` | First-time setup — Notion databases and initial config |
 | `references/routing-rules.md` | Deciding where ambiguous information belongs |
 | `references/schemas.md` | Setting up Notion databases, designing structure |
 | `references/anti-bloat.md` | Memory quality is degrading or cleanup is needed |
 | `references/notion-layouts.md` | Setting up or reconfiguring the Notion OS |
+| `references/notion-mcp-calls.md` | Exact MCP call syntax for every save operation |
 | `references/examples.md` | Concrete examples of good/bad saves |
+| `references/maintenance.md` | Quarterly review checklist and on-demand cleanup |
 
 ---
 
@@ -129,3 +134,4 @@ Skip if the session was trivial (troubleshooting only, quick lookups, no decisio
 - Keep Durable Memory entries under 20 bullets total.
 - Keep Standing Orders minimal — only what actually recurs.
 - When in doubt between two destinations, pick the more specific one.
+- Always confirm saves with the entry title — never silently fail.
