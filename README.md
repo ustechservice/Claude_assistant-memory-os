@@ -1,6 +1,10 @@
 # assistant-memory-os
 
-A memory routing skill for Claude, Claude Code, and OpenClaw. Routes everything that should persist across sessions into exactly one of four Notion destinations — so Claude never forgets what matters, never saves what doesn’t, and always knows where to put things.
+**Notion memory for Claude, Claude Code, and OpenClaw.**
+
+This skill gives Claude a persistent, human-readable memory system built on Notion. Without it, Claude forgets everything between sessions, saves things in the wrong place, or buries decisions inside bloated context that nobody reads. With it, every piece of information that should persist gets routed into exactly one of four destinations: a session log (what happened, what was decided, what’s next), durable memory (stable preferences and operating rules that shape all future sessions), a standing order (recurring duties with a cadence and expected output), or a category page (long-form outputs like research, plans, SOPs, and guides). All of it lives in Notion — human-readable, editable without Claude, and browsable at any time.
+
+Activates on trigger phrases such as "log this session", "remember this", and "track this weekly", and automatically writes a session log at the end of any meaningful session without being asked. Works Notion-first, hybrid (local MEMORY.md + Notion), or minimal depending on your setup.
 
 > Assistants fail continuity in three ways: they forget too much, save too much junk, or collapse sessions, recurring duties, and reference knowledge into one unmanageable pile. This skill solves that by giving every piece of information exactly one home.
 
