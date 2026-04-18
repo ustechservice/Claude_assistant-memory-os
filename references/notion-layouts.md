@@ -77,7 +77,7 @@ Workspace Root
 
 ## Layout 3: Hybrid (Local Memory + Notion)
 
-Best for: developers and operators using Claude Code or OpenClaw who want local memory control with Notion as the richer record.
+Best for: developers and operators using Claude Code who want local memory control with Notion as the richer record.
 
 ```
 Local (MEMORY.md or Claude Code memory system)

@@ -145,10 +145,10 @@ Claude will write a session log entry automatically. Verify:
 
 ## Hybrid Setup (Optional)
 
-If you're using Claude Code or OpenClaw and want local memory:
+If you're using Claude Code and want local memory:
 
-1. Create a `MEMORY.md` file in your project root (or `~/.claude/memory/`)
-2. Add your preferences, constraints, and routing rules there
+1. Copy `MEMORY.md` from this repo into your project root or `~/.claude/`
+2. Fill in your preferences, constraints, and routing rules
 3. Tell Claude: "My Durable Memory lives in MEMORY.md locally. Session logs and standing orders go to Notion."
 4. Claude will use local memory for behavior-shaping facts and Notion for everything richer
 
@@ -175,3 +175,39 @@ If you're using Claude Code or OpenClaw and want local memory:
 **Standing Orders aren't being executed**
 → Check that each order has a cadence, expected output, and destination.
 → Vague orders ("keep an eye on things") will not be executed. Make them specific.
+
+---
+
+## Setup Validation
+
+Once you've completed Steps 1-5, run these prompts to verify each layer is working.
+
+**Test Session Logs:**
+> "Log this session. Title it 'Setup Test', summary: verified memory OS setup."
+
+Expected: Claude creates a new entry in your Claude Sessions database. Confirm it appears in Notion with the correct title format and fields filled in.
+
+**Test Durable Memory:**
+> "Remember this: my preferred response format is bullet points."
+
+Expected: Claude adds a bullet to your Durable Memory page or MEMORY.md under Preferences. Confirm it appears and the entry count updates.
+
+**Test Standing Orders:**
+> "Every Monday, remind me to review my open session loops. Expected output: a bullet list of open items."
+
+Expected: Claude creates a new row in your Standing Orders database with Cadence = Weekly and Expected Output filled in.
+
+**Test Category Pages:**
+> "Save this as a research note: 'Setup test complete. Memory OS is live.'"
+
+Expected: Claude creates a new page under your Research category page.
+
+**Test Routing:**
+> "Where should I save a competitive analysis I just finished?"
+
+Expected: Claude says "Category Pages → Research" without asking for clarification. If it asks "where should I save this?" your Routing Rules in Durable Memory are incomplete — add them.
+
+**Full system check:**
+> "Run a quick health check on my memory OS. Tell me what's configured and what's missing."
+
+Expected: Claude reads your Durable Memory, confirms it knows your database names, and flags any missing routing rules or configuration gaps.
