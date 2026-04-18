@@ -145,7 +145,7 @@ Claude will write a session log entry automatically. Verify:
 
 ## Hybrid Setup (Optional)
 
-If you're using Claude Code and want local memory:
+If you're using Claude Code or OpenClaw and want local memory:
 
 1. Copy `MEMORY.md` from this repo into your project root or `~/.claude/`
 2. Fill in your preferences, constraints, and routing rules
