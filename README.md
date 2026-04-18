@@ -74,39 +74,18 @@ A four-destination routing skill for clean Claude assistant continuity across se
 
 ## Installation
 
-Choose the path that matches how you use Claude:
-
----
-
-### Path A: Claude.ai Web or Projects
-
-Paste the contents of `SKILL.md` into your Claude Project instructions or system prompt. `SKILL.md` is fully self-contained -- no other files are required.
-
----
-
-### Path B: Claude Code (CLI / IDE)
+### Option 1: Claude Code Skills Directory
 
 1. Clone or download this repo
 2. Copy the `assistant-memory-os` folder into your Claude Code skills directory:
    ```
    ~/.claude/skills/assistant-memory-os/
    ```
-3. Restart Claude Code -- the skill activates on trigger phrases automatically
+3. Restart Claude Code — the skill activates on trigger phrases automatically
 
-**Or:** Copy `CLAUDE.md` from this repo into your project root. Claude Code will auto-load it when you open the project.
+### Option 2: Copy SKILL.md as a System Prompt
 
----
-
-### Path C: Hybrid Mode (Claude Code + Local Memory)
-
-Best for developers who want fast local memory with Notion for richer records.
-
-1. Copy `MEMORY.md` from this repo into your project root or `~/.claude/`
-2. Fill in your preferences, constraints, and routing rules
-3. Follow Path B to install the skill
-4. Tell Claude: *"My Durable Memory is in MEMORY.md locally. Session logs and standing orders go to Notion."*
-
-See [`references/quick-start.md`](references/quick-start.md) for the full Notion setup.
+Paste the contents of `SKILL.md` into your system prompt or Claude project instructions. Reference the other files as needed.
 
 ---
 

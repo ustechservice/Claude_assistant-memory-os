@@ -4,19 +4,6 @@ How to decide where information belongs. Apply the decision tree first, then use
 
 ---
 
-## What Is a "Meaningful Exchange"
-
-A session qualifies as meaningful if **at least one** of the following is true:
-- A decision was made
-- A non-trivial task was completed or advanced
-- A plan, document, or design was created or substantially modified
-- A substantive question was researched and answered
-- An open loop was created, resolved, or updated
-
-Does **not** qualify: quick single-answer lookups, small talk, purely conversational exchanges with no outputs, sessions where nothing was decided or produced.
-
----
-
 ## Decision Tree
 
 ```
