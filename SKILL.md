@@ -1,6 +1,15 @@
 ---
 name: assistant-memory-os
-description: Notion-based assistant continuity system. Routes information cleanly across four layers — Session Logs, Durable Memory, Standing Orders, and Category Pages — to prevent memory bloat, context loss, and routing chaos. Use when the user wants to set up assistant continuity, save session summaries, capture recurring duties, or structure their Notion workspace as an assistant operating system.
+description: >
+  Memory routing skill for Claude, Claude Code, and OpenClaw. Solves the
+  assistant forgetting problem by routing all persistent information into
+  exactly one of four Notion destinations: Session Logs (summaries and
+  decisions), Durable Memory (stable preferences and rules), Standing Orders
+  (recurring duties with a cadence), and Category Pages (long-form outputs
+  and knowledge). Prevents memory bloat, context collapse, and routing chaos.
+  Activates on trigger phrases or automatically at the end of any meaningful
+  session (3+ exchanges with a decision, task, or output). Works Notion-first,
+  hybrid (local MEMORY.md + Notion), or minimal depending on setup.
 origin: ustechservice
 ---
 
@@ -262,13 +271,17 @@ Read `references/notion-layouts.md` for full workspace structure examples.
 
 ## Reference Files
 
+These files provide deeper detail. This file is self-contained for day-to-day use.
+
 | File | Use when |
 |---|---|
-| `references/routing-rules.md` | Deciding where information belongs |
-| `references/schemas.md` | Designing database and page structure |
+| `references/routing-rules.md` | Deciding where information belongs (full decision tree + ambiguous cases) |
+| `references/schemas.md` | Designing Notion database and page structure |
 | `references/anti-bloat.md` | Memory quality is degrading or cleanup is needed |
-| `references/notion-layouts.md` | Setting up a Notion workspace |
+| `references/notion-layouts.md` | Setting up a Notion workspace (4 layout templates) |
 | `references/examples.md` | Concrete good/bad examples for each layer |
-| `references/quick-start.md` | First-time setup in 30 minutes |
-| `references/notion-mcp-calls.md` | MCP call templates for Notion writes |
+| `references/quick-start.md` | First-time Notion setup in 30 minutes |
+| `references/notion-mcp-calls.md` | MCP call templates for all Notion write operations |
 | `references/maintenance.md` | Quarterly review and cleanup procedures |
+| `references/openclaw-setup.md` | OpenClaw-specific setup and configuration |
+| `references/upgrade-path.md` | MemoryOS-MCP comparison and upgrade decision framework |

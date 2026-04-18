@@ -1,8 +1,8 @@
 # assistant-memory-os
 
-A four-destination routing skill for clean Claude assistant continuity across sessions, built on Notion as the persistence layer.
+A memory routing skill for Claude, Claude Code, and OpenClaw. Routes everything that should persist across sessions into exactly one of four Notion destinations — so Claude never forgets what matters, never saves what doesn’t, and always knows where to put things.
 
-> Assistants fail continuity in three ways: they forget too much, save too much junk, or collapse sessions, recurring duties, and reference knowledge into one unmanageable pile. This skill solves that.
+> Assistants fail continuity in three ways: they forget too much, save too much junk, or collapse sessions, recurring duties, and reference knowledge into one unmanageable pile. This skill solves that by giving every piece of information exactly one home.
 
 ---
 
@@ -129,15 +129,19 @@ See [`references/quick-start.md`](references/quick-start.md) for step-by-step No
 
 | File | Purpose |
 |---|---|
-| [`SKILL.md`](SKILL.md) | Core skill — routing model, triggers, operating rules |
+| [`SKILL.md`](SKILL.md) | Core skill — self-contained, use as system prompt or Claude Code skill |
+| [`MEMORY.md`](MEMORY.md) | Starter template for local Durable Memory (hybrid mode) |
+| [`CLAUDE.md`](CLAUDE.md) | Auto-loaded by Claude Code — points to SKILL.md and MEMORY.md |
 | [`references/routing-rules.md`](references/routing-rules.md) | Decision tree, trigger phrases, ambiguous case resolution |
 | [`references/schemas.md`](references/schemas.md) | Notion database schemas for all four destinations |
 | [`references/anti-bloat.md`](references/anti-bloat.md) | What not to save, warning signs, cleanup rules |
 | [`references/notion-layouts.md`](references/notion-layouts.md) | 4 workspace layouts: minimal, standard, hybrid, team |
 | [`references/examples.md`](references/examples.md) | Good and bad examples for every layer |
-| [`references/quick-start.md`](references/quick-start.md) | 30-minute first-time setup guide |
+| [`references/quick-start.md`](references/quick-start.md) | 30-minute first-time Notion setup guide with validation |
 | [`references/notion-mcp-calls.md`](references/notion-mcp-calls.md) | MCP call templates for all Notion write operations |
 | [`references/maintenance.md`](references/maintenance.md) | Quarterly review checklist, cleanup commands, benchmarks |
+| [`references/openclaw-setup.md`](references/openclaw-setup.md) | OpenClaw-specific setup and configuration |
+| [`references/upgrade-path.md`](references/upgrade-path.md) | MemoryOS-MCP comparison and upgrade decision framework |
 
 ---
 
