@@ -21,6 +21,17 @@ This skill governs how Claude saves and retrieves persistent information using a
 - End of a session with 3+ meaningful exchanges — write a session log automatically, without asking permission
 - Assistant continuity is breaking down: things are being forgotten, duplicated, or buried
 
+## What Is a "Meaningful Exchange"
+
+A session qualifies as meaningful if **at least one** of the following is true:
+- A decision was made
+- A non-trivial task was completed or advanced
+- A plan, document, or design was created or substantially modified
+- A substantive question was researched and answered
+- An open loop was created, resolved, or updated
+
+Does **not** qualify: quick single-answer lookups, small talk, purely conversational exchanges with no outputs or decisions.
+
 ## The Four-Layer Model
 
 Route all persistent information into exactly one of these destinations. Do not collapse them into one bucket.
@@ -118,6 +129,32 @@ Apply in order:
 
 When something fits two destinations: the more specific one wins. Never duplicate across layers.
 
+### Routing Decision Tree
+
+```
+Is this worth saving at all?
+│
+├─ No (trivial chatter, single-answer lookups, no decisions) → Save nothing
+│
+└─ Yes → Does it repeat on a schedule or condition?
+          │
+          ├─ Yes → STANDING ORDERS
+          │
+          └─ No → Is it a stable fact that shapes behavior across all future sessions?
+                   │
+                   ├─ Yes → DURABLE MEMORY
+                   │
+                   └─ No → Is it a summary, decision, or action from this session?
+                            │
+                            ├─ Yes → SESSION LOGS
+                            │
+                            └─ No → Is it a long-form output, research, plan, or guide?
+                                     │
+                                     ├─ Yes → CATEGORY PAGES (pick the right one)
+                                     │
+                                     └─ Unclear → Ask the user, then default to Session Logs
+```
+
 Read `references/routing-rules.md` for trigger phrases, decision tree, and ambiguous case resolution.
 
 ## Anti-Bloat Rules (Summary)
@@ -129,8 +166,62 @@ Read `references/routing-rules.md` for trigger phrases, decision tree, and ambig
 - Do not store recurring duties as loose notes — put them in Standing Orders
 - Do not paste output content into Session Logs — link to the Category Page
 - Do not create vague "Recommendations" or "General" buckets
+- **The smell test:** "If I read this in 30 days with no context, would it still be useful and clear?" If no — compress or cut.
 
 Read `references/anti-bloat.md` for detailed rules, warning signs, and cleanup guidance.
+
+## Trigger Commands
+
+### Session Logs
+| Say this | What happens |
+|---|---|
+| `"log this session"` | Writes session summary now |
+| `"summarize what we did"` | Writes session summary now |
+| `"create a handoff"` | Writes handoff-focused session log |
+| `"what did we decide?"` | Surfaces decisions from this session |
+| `"what are my next actions?"` | Lists next actions from session log |
+| `"what's still open?"` | Lists open loops |
+| `"end of session"` | Triggers full end-of-session routine |
+| *(3+ meaningful exchanges)* | Writes session log automatically — no prompt needed |
+
+### Durable Memory
+| Say this | What happens |
+|---|---|
+| `"remember this for future sessions"` | Saves to Durable Memory |
+| `"always do X"` | Saves operating rule |
+| `"never do X"` | Saves constraint |
+| `"my preference is X"` | Saves preference |
+| `"this is a standing rule"` | Saves to Durable Memory |
+| `"update my memory"` | Reviews and updates Durable Memory |
+
+### Standing Orders
+| Say this | What happens |
+|---|---|
+| `"track this weekly"` | Creates Standing Order (weekly cadence) |
+| `"watch for X"` | Creates Standing Order (monitoring) |
+| `"check this every Monday"` | Creates Standing Order (scheduled) |
+| `"report on X daily"` | Creates Standing Order (scheduled report) |
+| `"add this to my recurring duties"` | Creates Standing Order |
+| `"remind me to do X every week"` | Creates Standing Order |
+| `"monitor X and alert me when..."` | Creates Standing Order (conditional) |
+
+### Category Pages
+| Say this | What happens |
+|---|---|
+| `"save this research"` | Saves to Research category page |
+| `"document this process"` | Saves to SOPs category page |
+| `"save this plan"` | Saves to relevant category page |
+| `"log today's work"` | Saves to Daily Logs category page |
+| `"this is a guide / SOP / audit"` | Saves to appropriate category page |
+
+### Maintenance
+| Say this | What happens |
+|---|---|
+| `"clean up my Durable Memory"` | Reads page, removes bloat, reports count |
+| `"audit my Standing Orders"` | Lists all orders, flags stale ones |
+| `"archive old sessions"` | Identifies closed sessions 90+ days old |
+| `"run quarterly review"` | Steps through full maintenance checklist |
+| `"check my memory count"` | Reports current bullet count in Durable Memory |
 
 ## End-of-Session Routine
 
